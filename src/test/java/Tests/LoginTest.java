@@ -37,8 +37,8 @@ public class LoginTest {
         String PasswordValue = "123456";
         PasswordElement.sendKeys(PasswordValue);
 
-        WebElement Enterzelement = driver.findElement(By.id("enterbtn"));
-        Enterzelement.click();
+        WebElement EnterElement = driver.findElement(By.id("enterbtn"));
+        EnterElement.click();
 
         WebElement ErrorMessageElement = driver.findElement(By.id("errormsg"));
         Assert.assertEquals("Invalid User Name or PassWord",ErrorMessageElement.getText());
