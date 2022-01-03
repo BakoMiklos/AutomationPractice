@@ -60,5 +60,8 @@ public class AlertTest {
         Alert TextBox = driver.switchTo().alert();
         TextBox.sendKeys("Bun Venit");
         TextBox.accept();
+
+        driver.quit();
+
     }
 }

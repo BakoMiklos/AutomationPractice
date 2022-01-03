@@ -44,6 +44,7 @@ public class LoginTest {
         Assert.assertEquals("Invalid User Name or PassWord",ErrorMessageElement.getText());
 
         //asta i un comment
+        driver.quit();
 
     }
 
