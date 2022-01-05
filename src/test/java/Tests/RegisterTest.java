@@ -103,7 +103,7 @@ public class RegisterTest {
         WebElement ImageElement = driver.findElement(By.id("imagesrc"));
         ImageElement.sendKeys("C:\\Automation\\ComenziGit.txt");
 
-        driver.quit();
+//        driver.quit();
 
     }
 }

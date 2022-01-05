@@ -61,7 +61,7 @@ public class AlertTest {
         TextBox.sendKeys("Bun Venit");
         TextBox.accept();
 
-        driver.quit();
+
 
     }
 }
