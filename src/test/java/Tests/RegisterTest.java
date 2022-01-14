@@ -1,5 +1,8 @@
 package Tests;
 
+import Base.SharedData;
+import Help.ElementMetods;
+import Help.PageMetods;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -10,21 +13,17 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-public class RegisterTest {
-    public WebDriver driver;
+public class RegisterTest extends SharedData {
+    public PageMetods pageMetods;
+    public ElementMetods elementMetods;
 
     @Test
     public void TestAutomat() {
-        //setam chrome driver
-        System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver.exe");
-        //deschidem un browser chrome
-        driver = new ChromeDriver();
 
-        driver.get("http://demo.automationtesting.in/Index.html");
-        //marim browserul
-        driver.manage().window().maximize();
+        pageMetods = new PageMetods(driver);
+        elementMetods = new ElementMetods(driver);
 
-        Assert.assertEquals("Index", driver.getTitle());
+        pageMetods.ValidateTitlePage("Index");
 
         WebElement SkipElement = driver.findElement(By.id("btn2"));
         SkipElement.click();
@@ -61,24 +60,19 @@ public class RegisterTest {
         HobbyElement.click();
 
         WebElement SkilElement = driver.findElement(By.id("Skills"));
-        Select SkilSelect = new Select(SkilElement);
-        SkilSelect.selectByVisibleText("Android");
+        elementMetods.SelectTextElement(SkilElement,"Android");
 
         WebElement CountryElement = driver.findElement(By.id("country"));
-        Select CountrySelect = new Select(CountryElement);
-        CountrySelect.selectByValue("India");
+        elementMetods.SelectTextElement(CountryElement,"India");
 
         WebElement Yearelement = driver.findElement(By.id("yearbox"));
-        Select YearSelect = new Select(Yearelement);
-        YearSelect.selectByValue("1985");
+        elementMetods.SelectValueElement(Yearelement,"1985");
 
         WebElement MonthElement = driver.findElement(By.xpath("//div[@class='col-md-3 col-xs-3 col-sm-3']/select[@placeholder='Month']"));
-        Select MonthSelect = new Select(MonthElement);
-        MonthSelect.selectByValue("July");
+        elementMetods.SelectTextElement(MonthElement,"July");
 
         WebElement DayElement = driver.findElement(By.id("daybox"));
-        Select DaySelect = new Select(DayElement);
-        DaySelect.selectByValue("26");
+        elementMetods.SelectValueElement(DayElement,"26");
 
         WebElement LanguageElement = driver.findElement(By.id("msdd"));
         LanguageElement.click();

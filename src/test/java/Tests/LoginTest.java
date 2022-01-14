@@ -1,5 +1,8 @@
 package Tests;
 
+import Base.SharedData;
+import Help.ElementMetods;
+import Help.PageMetods;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -7,44 +10,38 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class LoginTest {
-
-    public WebDriver driver;
+public class LoginTest extends SharedData {
+    public PageMetods pageMetods;
+    public ElementMetods elementMetods;
 
     @Test
     public void TestAutomat(){
-        //setam chrome driver
-        System.setProperty("webdriver.chrome.driver","C:\\Automation\\chromedriver.exe");
-        //deschidem un browser chrome
-        driver = new ChromeDriver();
+        pageMetods = new PageMetods(driver);
+        elementMetods = new ElementMetods(driver);
 
-        driver.get("http://demo.automationtesting.in/Index.html");
-        //marim browserul
-        driver.manage().window().maximize();
-
-        Assert.assertEquals("Index",driver.getTitle());
+        pageMetods.ValidateTitlePage("Index");
 
         WebElement SignInElement = driver.findElement(By.id("btn1"));
-        SignInElement.click();
+        elementMetods.ClickElement(SignInElement);
 
-        Assert.assertEquals("SignIn",driver.getTitle());
+        pageMetods.ValidateTitlePage("SignIn");
 
         WebElement EmailElement = driver.findElement(By.cssSelector("input[placeholder='E mail']"));
         String EmailValue = "bakomiklos@yahoo.com";
-        EmailElement.sendKeys(EmailValue);
+        elementMetods.FillElement(EmailElement,EmailValue);
 
         WebElement PasswordElement = driver.findElement(By.cssSelector("input[placeholder='Password']"));
         String PasswordValue = "123456";
-        PasswordElement.sendKeys(PasswordValue);
+        elementMetods.FillElement(PasswordElement,PasswordValue);
 
         WebElement EnterElement = driver.findElement(By.id("enterbtn"));
-        EnterElement.click();
+        elementMetods.ClickElement(EnterElement);
 
         WebElement ErrorMessageElement = driver.findElement(By.id("errormsg"));
-        Assert.assertEquals("Invalid User Name or PassWord",ErrorMessageElement.getText());
+        elementMetods.ValidateElementMessage(ErrorMessageElement,"Invalid User Name or PassWord");
 
         //asta i un comment
-        driver.quit();
+//        driver.quit();
 
     }
 

@@ -1,5 +1,9 @@
 package Tests;
 
+import Base.SharedData;
+import Help.AlertMetods;
+import Help.ElementMetods;
+import Help.PageMetods;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
@@ -11,18 +15,16 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
-public class AlertTest {
-    public WebDriver driver;
+public class AlertTest extends SharedData {
+    public ElementMetods elementMetods;
+    public PageMetods pageMetods;
+    public AlertMetods alertMetods;
+
     @Test
     public void TestAutomat() {
-        //setam chrome driver
-        System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver.exe");
-        //deschidem un browser chrome
-        driver = new ChromeDriver();
-
-        driver.get("http://demo.automationtesting.in/Index.html");
-        //marim browserul
-        driver.manage().window().maximize();
+        elementMetods = new ElementMetods(driver);
+        pageMetods = new PageMetods(driver);
+        alertMetods = new AlertMetods(driver);
 
         Assert.assertEquals("Index", driver.getTitle());
 
@@ -30,38 +32,31 @@ public class AlertTest {
         SkipElement.click();
 
         WebElement SwitchToElement = driver.findElement(By.xpath("//a[contains(text(),'Switch')]"));
-        Actions SwitchToAction = new Actions(driver);
-        SwitchToAction.moveToElement(SwitchToElement).perform();
+        elementMetods.HoverElement(SwitchToElement);
 
         WebElement AlertsElement = driver.findElement(By.xpath("//a[contains(text(),'Alerts')]"));
         AlertsElement.click();
 
-        driver.navigate().to("http://demo.automationtesting.in/Alerts.html");
+        pageMetods.GoToSpecificUrl("http://demo.automationtesting.in/Alerts.html");
 
         List<WebElement> AlertOptionsElement = driver.findElements(By.xpath("//ul[@class='nav nav-tabs nav-stacked']/li/a"));
         AlertOptionsElement.get(0).click();
 
         WebElement AlertOkButton = driver.findElement(By.xpath("//div[@id='OKTab']/button"));
         AlertOkButton.click();
-        Alert OK = driver.switchTo().alert();
-        OK.accept();
+        alertMetods.AcceptAlert();
 
         AlertOptionsElement.get(1).click();
 
         WebElement CancelButtonElement = driver.findElement(By.xpath("//div[@id='CancelTab']/button"));
         CancelButtonElement.click();
-        Alert Cancel = driver.switchTo().alert();
-        Cancel.dismiss();
+        alertMetods.CancelAlert();
 
         AlertOptionsElement.get(2).click();
 
         WebElement TextBoxButton = driver.findElement(By.xpath("//div[@id='Textbox']/button"));
         TextBoxButton.click();
-        Alert TextBox = driver.switchTo().alert();
-        TextBox.sendKeys("Bun Venit");
-        TextBox.accept();
-
-
+        alertMetods.FillAcceptAlert("Salut");
 
     }
 }

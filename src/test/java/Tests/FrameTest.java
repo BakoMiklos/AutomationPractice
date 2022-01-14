@@ -1,5 +1,7 @@
 package Tests;
 
+import Base.SharedData;
+import Help.FrameMetods;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -10,18 +12,12 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
-public class FrameTest {
-    public WebDriver driver;
+public class FrameTest extends SharedData {
+    public FrameMetods frameMetods;
+
     @Test
     public void TestAutomat() {
-        //setam chrome driver
-        System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver.exe");
-        //deschidem un browser chrome
-        driver = new ChromeDriver();
-
-        driver.get("http://demo.automationtesting.in/Index.html");
-        //marim browserul
-        driver.manage().window().maximize();
+        frameMetods = new FrameMetods(driver);
 
         Assert.assertEquals("Index", driver.getTitle());
 
@@ -40,16 +36,16 @@ public class FrameTest {
         List<WebElement> FrameOptions = driver.findElements(By.cssSelector(".nav-tabs li a"));
         FrameOptions.get(0).click();
 
-        driver.switchTo().frame("singleframe");
+        frameMetods.SwitchFrameById("singleframe");
 
         WebElement InputSingle = driver.findElement(By.cssSelector("input[type='text']"));
         InputSingle.sendKeys("Salut");
-        driver.switchTo().defaultContent();
+        frameMetods.SwitchDefaultFrame();
 
         FrameOptions.get(1).click();
 
-        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@src='MultipleFrames.html']")));
-        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@src='SingleFrame.html']")));
+        frameMetods.SwitchFrameByElement(driver.findElement(By.xpath("//iframe[@src='MultipleFrames.html']")));
+        frameMetods.SwitchFrameByElement(driver.findElement(By.xpath("//iframe[@src='SingleFrame.html']")));
 
         WebElement InputMultiple = driver.findElement(By.cssSelector("input[type='text']"));
         InputMultiple.sendKeys("Salut");
