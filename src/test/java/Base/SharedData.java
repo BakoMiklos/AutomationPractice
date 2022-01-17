@@ -20,7 +20,7 @@ public class SharedData {
         driver.manage().window().maximize();
     }
 
-    @After
+ //   @After
     public void TearDown(){
         driver.quit();
     }

@@ -1,54 +1,57 @@
 package Tests;
 
 import Base.SharedData;
-import Help.FrameMetods;
+import Help.ElementMethods;
+import Help.FrameMethods;
+import Help.PageMethods;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
 public class FrameTest extends SharedData {
-    public FrameMetods frameMetods;
+    public ElementMethods elementMethods;
+    public PageMethods pageMethods;
+    public FrameMethods frameMethods;
 
     @Test
     public void TestAutomat() {
-        frameMetods = new FrameMetods(driver);
+        frameMethods = new FrameMethods(driver);
+        elementMethods = new ElementMethods(driver);
+        pageMethods = new PageMethods(driver);
 
-        Assert.assertEquals("Index", driver.getTitle());
+        pageMethods.ValidateTitlePage("Index");
 
         WebElement SkipElement = driver.findElement(By.id("btn2"));
-        SkipElement.click();
+        elementMethods.ClickElement(SkipElement);
 
         WebElement SwitchToElement = driver.findElement(By.xpath("//a[contains(text(),'Switch')]"));
-        Actions SwitchToAction = new Actions(driver);
-        SwitchToAction.moveToElement(SwitchToElement).perform();
+        elementMethods.HoverElement(SwitchToElement);
 
         WebElement FrameElement = driver.findElement(By.xpath("//a[contains(text(),'Frames')]"));
-        FrameElement.click();
+        elementMethods.ClickElement(FrameElement);
 
         driver.navigate().to("http://demo.automationtesting.in/Frames.html");
 
         List<WebElement> FrameOptions = driver.findElements(By.cssSelector(".nav-tabs li a"));
         FrameOptions.get(0).click();
 
-        frameMetods.SwitchFrameById("singleframe");
+        frameMethods.SwitchFrameById("singleframe");
 
         WebElement InputSingle = driver.findElement(By.cssSelector("input[type='text']"));
-        InputSingle.sendKeys("Salut");
-        frameMetods.SwitchDefaultFrame();
+        elementMethods.FillElement(InputSingle,"Salutare");
+        frameMethods.SwitchDefaultFrame();
 
         FrameOptions.get(1).click();
 
-        frameMetods.SwitchFrameByElement(driver.findElement(By.xpath("//iframe[@src='MultipleFrames.html']")));
-        frameMetods.SwitchFrameByElement(driver.findElement(By.xpath("//iframe[@src='SingleFrame.html']")));
+        frameMethods.SwitchFrameByElement(driver.findElement(By.xpath("//iframe[@src='MultipleFrames.html']")));
+        frameMethods.SwitchFrameByElement(driver.findElement(By.xpath("//iframe[@src='SingleFrame.html']")));
 
         WebElement InputMultiple = driver.findElement(By.cssSelector("input[type='text']"));
-        InputMultiple.sendKeys("Salut");
+        elementMethods.FillElement(InputMultiple,"Salut");
 
     }
 }

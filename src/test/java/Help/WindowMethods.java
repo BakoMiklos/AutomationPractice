@@ -4,10 +4,10 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;
 
-public class WondowMetods {
+public class WindowMethods {
     public WebDriver driver;
 
-    public WondowMetods(WebDriver driver) {
+    public WindowMethods(WebDriver driver) {
         this.driver = driver;
     }
 

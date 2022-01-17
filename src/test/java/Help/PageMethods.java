@@ -3,10 +3,10 @@ package Help;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
-public class PageMetods {
+public class PageMethods {
     public WebDriver driver;
 
-    public PageMetods(WebDriver driver) {
+    public PageMethods(WebDriver driver) {
         this.driver = driver;
     }
 

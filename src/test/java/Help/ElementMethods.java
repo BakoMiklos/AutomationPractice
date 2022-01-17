@@ -6,10 +6,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-public class ElementMetods {
+public class ElementMethods {
     public WebDriver driver;
 
-    public ElementMetods(WebDriver driver) {
+    public ElementMethods(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -22,7 +22,7 @@ public class ElementMetods {
     }
 
     public void ValidateElementMessage(WebElement Element,String Value){
-        Assert.assertEquals("The text froom element is not correct",Value,Element.getText());
+        Assert.assertEquals("The text from element is not correct",Value,Element.getText());
     }
 
     public void SelectTextElement(WebElement Element,String Value){

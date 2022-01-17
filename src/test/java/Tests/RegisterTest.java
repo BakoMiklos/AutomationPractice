@@ -1,89 +1,78 @@
 package Tests;
 
 import Base.SharedData;
-import Help.ElementMetods;
-import Help.PageMetods;
-import org.junit.Assert;
+import Help.ElementMethods;
+import Help.PageMethods;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
 public class RegisterTest extends SharedData {
-    public PageMetods pageMetods;
-    public ElementMetods elementMetods;
+    public PageMethods pageMetods;
+    public ElementMethods elementMethods;
 
     @Test
     public void TestAutomat() {
 
-        pageMetods = new PageMetods(driver);
-        elementMetods = new ElementMetods(driver);
+        pageMetods = new PageMethods(driver);
+        elementMethods = new ElementMethods(driver);
 
         pageMetods.ValidateTitlePage("Index");
 
         WebElement SkipElement = driver.findElement(By.id("btn2"));
-        SkipElement.click();
+        elementMethods.ClickElement(SkipElement);
 
         WebElement FirstNameElement = driver.findElement(By.xpath("//div[@class='col-md-4 col-xs-4 col-sm-4']/input[@placeholder='First Name']"));
-        FirstNameElement.click();
-        String FirstNameValue = "Bako";
-        FirstNameElement.sendKeys(FirstNameValue);
+        elementMethods.ClickElement(FirstNameElement);
+        elementMethods.FillElement(FirstNameElement,"Bako");
 
         WebElement LastNameElement = driver.findElement(By.xpath("//div[@class='col-md-4 col-xs-4 col-sm-4']/input[@placeholder='Last Name']"));
-        LastNameElement.click();
-        String LastNameValue = "Miklos";
-        LastNameElement.sendKeys(LastNameValue);
+        elementMethods.ClickElement(LastNameElement);
+        elementMethods.FillElement(LastNameElement,"Miklos");
 
         WebElement AddressElement = driver.findElement(By.xpath("//div[@class='col-md-8 col-xs-8 col-sm-8']/textarea[@rows='3']"));
-        AddressElement.click();
-        String AddressValue = "Str. Fabricii nr 33";
-        AddressElement.sendKeys(AddressValue);
+        elementMethods.ClickElement(AddressElement);
+        elementMethods.FillElement(AddressElement,"Str. Fabricii nr 33");
 
         WebElement EmailElement = driver.findElement(By.xpath("//div[@id='eid']/input[@type='email']"));
-        EmailElement.click();
-        String EmailValue = "Jointerul@gmail.com";
-        EmailElement.sendKeys(EmailValue);
+        elementMethods.ClickElement(EmailElement);
+        elementMethods.FillElement(EmailElement,"Jointerul@gmail.com");
 
         WebElement TelElement = driver.findElement(By.xpath("//div[@class='col-md-4 col-xs-4 col-sm-4']/input[@type='tel']"));
-        TelElement.click();
-        String TelValue = "0745123456";
-        TelElement.sendKeys(TelValue);
+        elementMethods.ClickElement(TelElement);
+        elementMethods.FillElement(TelElement,"0747123456");
 
         WebElement GendreElement = driver.findElement(By.xpath("//div[@class='col-md-4 col-xs-4 col-sm-4']/label/input[@value='Male']"));
-        GendreElement.click();
+        elementMethods.ClickElement(GendreElement);
 
         WebElement HobbyElement = driver.findElement(By.id("checkbox2"));
-        HobbyElement.click();
+        elementMethods.ClickElement(HobbyElement);
 
         WebElement SkilElement = driver.findElement(By.id("Skills"));
-        elementMetods.SelectTextElement(SkilElement,"Android");
+        elementMethods.SelectTextElement(SkilElement,"Android");
 
         WebElement CountryElement = driver.findElement(By.id("country"));
-        elementMetods.SelectTextElement(CountryElement,"India");
+        elementMethods.SelectTextElement(CountryElement,"India");
 
         WebElement Yearelement = driver.findElement(By.id("yearbox"));
-        elementMetods.SelectValueElement(Yearelement,"1985");
+        elementMethods.SelectValueElement(Yearelement,"1985");
 
         WebElement MonthElement = driver.findElement(By.xpath("//div[@class='col-md-3 col-xs-3 col-sm-3']/select[@placeholder='Month']"));
-        elementMetods.SelectTextElement(MonthElement,"July");
+        elementMethods.SelectTextElement(MonthElement,"July");
 
         WebElement DayElement = driver.findElement(By.id("daybox"));
-        elementMetods.SelectValueElement(DayElement,"26");
+        elementMethods.SelectValueElement(DayElement,"26");
 
         WebElement LanguageElement = driver.findElement(By.id("msdd"));
-        LanguageElement.click();
+        elementMethods.ClickElement(LanguageElement);
 
         WebElement PassswordElement = driver.findElement(By.id("firstpassword"));
-        String PasswordValue = "123456";
-        PassswordElement.sendKeys(PasswordValue);
+        elementMethods.FillElement(PassswordElement,"123456");
 
         WebElement SecondPassswordElement = driver.findElement(By.id("secondpassword"));
-        String SecondPasswordValue = "123456";
-        SecondPassswordElement.sendKeys(SecondPasswordValue);
+        elementMethods.FillElement(SecondPassswordElement,"123456");
 
         List<WebElement> LanguageElements = driver.findElements(By.xpath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all']/li/a"));
         for (Integer Index=0;Index<LanguageElements.size();Index ++){
@@ -92,12 +81,10 @@ public class RegisterTest extends SharedData {
             }
         }
 
-        GendreElement.click();
+        elementMethods.ClickElement(GendreElement);
 
         WebElement ImageElement = driver.findElement(By.id("imagesrc"));
         ImageElement.sendKeys("C:\\Automation\\ComenziGit.txt");
-
-//        driver.quit();
 
     }
 }

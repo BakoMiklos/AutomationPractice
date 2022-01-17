@@ -1,44 +1,47 @@
 package Tests;
 
 import Base.SharedData;
-import Help.WondowMetods;
+import Help.ElementMethods;
+import Help.PageMethods;
+import Help.WindowMethods;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WindowTest extends SharedData {
-    public WondowMetods windowMetods;
+    public WindowMethods windowMetods;
+    public ElementMethods elementMethods;
+    public PageMethods pageMethods;
 
     @Test
     public void TestAutomat() {
-        windowMetods = new WondowMetods(driver);
+        windowMetods = new WindowMethods(driver);
+        elementMethods = new ElementMethods(driver);
+        pageMethods = new PageMethods(driver);
 
-        Assert.assertEquals("Index", driver.getTitle());
+
+        pageMethods.ValidateTitlePage("Index");
 
         WebElement SkipElement = driver.findElement(By.id("btn2"));
-        SkipElement.click();
+        elementMethods.ClickElement(SkipElement);
 
         WebElement SwitchToElement = driver.findElement(By.xpath("//a[contains(text(),'Switch')]"));
-        Actions SwitchToAction = new Actions(driver);
-        SwitchToAction.moveToElement(SwitchToElement).perform();
+        elementMethods.HoverElement(SwitchToElement);
 
         WebElement WindowsElement = driver.findElement(By.xpath("//a[contains(text(),'Windows')]"));
-        WindowsElement.click();
+        elementMethods.ClickElement(WindowsElement);
 
-        driver.navigate().to("http://demo.automationtesting.in/Windows.html");
+        pageMethods.GoToSpecificUrl("http://demo.automationtesting.in/Windows.html");
 
         List<WebElement> WindowOptionElement = driver.findElements(By.xpath("//div[@class='tabpane pullleft']/ul/li/a"));
         WindowOptionElement.get(0).click();
 
         WebElement ClickButtonElement = driver.findElement(By.xpath("//div[@id='Tabbed']//button"));
-        ClickButtonElement.click();
+        elementMethods.ClickElement(ClickButtonElement);
         System.out.println("Titlul curent :"+driver.getTitle());
 
         windowMetods.SwitchToSpecificWindow(1);
@@ -47,7 +50,7 @@ public class WindowTest extends SharedData {
         WindowOptionElement.get(1).click();
 
         WebElement ButtonWindowElement = driver.findElement(By.xpath("//div[@id='Seperate']//button"));
-        ButtonWindowElement.click();
+        elementMethods.ClickElement(ButtonWindowElement);
 
         windowMetods.SwitchToSpecificWindow(1);
         windowMetods.CloseCurrentWindow();
