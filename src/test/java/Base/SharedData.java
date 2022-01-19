@@ -1,15 +1,12 @@
 package Base;
 
-import org.junit.After;
-import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class SharedData {
-    public WebDriver driver;
+    private WebDriver driver;
 
-    @Before
-    public void Setup(){
+    public void initiateDriver(){
         //setam chrome driver
         System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver.exe");
         //deschidem un browser chrome
@@ -20,8 +17,11 @@ public class SharedData {
         driver.manage().window().maximize();
     }
 
- //   @After
-    public void TearDown(){
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public void quitBrowser(){
         driver.quit();
     }
 }

@@ -14,15 +14,12 @@ public class FrameTest extends SharedData {
     @Test
     public void TestAutomat() {
 
-        indexPage = new IndexPage(driver);
-        registerPage = new RegisterPage(driver);
-        framePage = new FramePage(driver);
-
+        indexPage = new IndexPage(getDriver());
+        registerPage = new RegisterPage(getDriver());
+        framePage = new FramePage(getDriver());
         indexPage.ValidateIndexPage();
         indexPage.clickSkipSignIn();
-
         registerPage.goToFramePage();
-
         framePage.singleFrameProces("Salut");
         framePage.multipleFrameProces("Buna ziua");
 

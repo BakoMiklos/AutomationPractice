@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.HashMap;
+
 public class LoginPage {
 
     public WebDriver driver;
@@ -33,10 +35,10 @@ public class LoginPage {
         pageMetods.ValidateTitlePage("SignIn");
     }
 
-    public void loginInvalid(String email, String passw, String message){
-        elementMethods.FillElement(emailElement, email);
-        elementMethods.FillElement(passwordElement, passw);
+    public void loginInvalid(HashMap<String, String> values){
+        elementMethods.FillElement(emailElement, values.get("email"));
+        elementMethods.FillElement(passwordElement, values.get("password"));
         elementMethods.ClickElement(enterElement);
-        elementMethods.ValidateElementMessage(messageElement,message);
+        elementMethods.ValidateElementMessage(messageElement, values.get("message"));
     }
 }
