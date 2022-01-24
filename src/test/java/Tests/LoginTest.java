@@ -1,7 +1,6 @@
 package Tests;
 
 import Base.Hooks;
-import Base.SharedData;
 import Pages.IndexPage;
 import Pages.LoginPage;
 import org.junit.Test;
@@ -21,6 +20,4 @@ public class LoginTest extends Hooks {
         loginPage.ValidateSignInPage();
         loginPage.loginInvalid(testValues);
     }
-
-
 }

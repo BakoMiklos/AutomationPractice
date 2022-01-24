@@ -1,45 +1,29 @@
 package Pages;
 
-import Help.AlertMethods;
-import Help.ElementMethods;
-import Help.FrameMethods;
-import Help.PageMethods;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class AlertPage {
-    public WebDriver driver;
-    public PageMethods pageMethods;
-    public ElementMethods elementMethods;
-    public AlertMethods alertMethods;
-
+public class AlertPage extends BasePage {
 
     public AlertPage(WebDriver driver) {
-        this.driver = driver;
-
-        pageMethods = new PageMethods(driver);
-        elementMethods = new ElementMethods(driver);
-        alertMethods = new AlertMethods(driver);
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     @FindBy(xpath = "//a[contains(text(),'Alerts')]")
-    public WebElement alertElement;
+    private WebElement alertElement;
     @FindBy(xpath = "//ul[@class='nav nav-tabs nav-stacked']/li/a")
-    public List<WebElement> alertOptionElement;
+    private List<WebElement> alertOptionElement;
     @FindBy(xpath = "//div[@id='OKTab']/button")
-    public WebElement alertOkButtonElement;
+    private WebElement alertOkButtonElement;
     @FindBy(xpath ="//div[@id='CancelTab']/button")
-    public WebElement cancelButtonElement;
+    private WebElement cancelButtonElement;
     @FindBy(xpath = "//div[@id='Textbox']/button")
-    public WebElement textBoxButton;
+    private WebElement textBoxButton;
     @FindBy(xpath = "//a[contains(text(),'Switch')]")
-    public WebElement switchToElement;
+    private WebElement switchToElement;
 
     public void goToAlertPage(){
         elementMethods.HoverElement(switchToElement);

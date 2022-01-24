@@ -1,48 +1,27 @@
 package Pages;
 
-import Help.AlertMethods;
-import Help.ElementMethods;
-import Help.PageMethods;
-import Help.WindowMethods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class WindowPage {
-    public WebDriver driver;
-    public PageMethods pageMethods;
-    public ElementMethods elementMethods;
-    public AlertMethods alertMethods;
-    public WindowMethods windowMethods;
-    public AlertPage alertPage;
-    public IndexPage indexPage;
+public class WindowPage extends BasePage {
 
     public WindowPage(WebDriver driver) {
-        this.driver = driver;
-
-        pageMethods = new PageMethods(driver);
-        elementMethods = new ElementMethods(driver);
-        alertMethods = new AlertMethods(driver);
-        windowMethods = new WindowMethods(driver);
-        alertPage = new AlertPage(driver);
-        indexPage = new IndexPage(driver);
-        PageFactory.initElements(driver, this);
-
+        super(driver);
     }
 
     @FindBy(xpath = "//a[contains(text(),'Windows')]")
-    public WebElement windowElement;
+    private WebElement windowElement;
     @FindBy(xpath = "//div[@class='tabpane pullleft']/ul/li/a")
-    public List<WebElement> windowOptionElement;
+    private List<WebElement> windowOptionElement;
     @FindBy(xpath = "//div[@id='Tabbed']//button")
-    public WebElement clickButtonElement;
+    private WebElement clickButtonElement;
     @FindBy(xpath = "//div[@id='Seperate']//button")
-    public WebElement buttonWindowElement;
+    private WebElement buttonWindowElement;
     @FindBy(xpath = "//div[@id='Multiple']//button")
-    public WebElement buttonTabsElement;
+    private WebElement buttonTabsElement;
 
     public void swichToSpecificWindow(Integer value){
         windowMethods.SwitchToSpecificWindow(value);
